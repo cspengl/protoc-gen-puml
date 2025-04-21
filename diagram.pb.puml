@@ -1,0 +1,65 @@
+@startuml diagram
+hide empty methods
+hide empty fields
+
+package example as example {
+	
+	abstract "optional_value" as example_ComplexMessage_optional_value
+	
+	struct "name" as example_ComplexMessage_name_string<<(D,#FF7700) string>>
+	
+	struct "id" as example_ComplexMessage_id_int32<<(D,#FF7700) int32>>
+	
+	struct "ComplexMessage" as example_ComplexMessage {
+		double_field : double
+		float_field : float
+		int32_field : int32
+		int64_field : int64
+		uint32_field : uint32
+		uint64_field : uint64
+		sint32_field : sint32
+		sint64_field : sint64
+		fixed32_field : fixed32
+		fixed64_field : fixed64
+		sfixed32_field : sfixed32
+		sfixed64_field : sfixed64
+		bool_field : bool
+		string_field : string
+		bytes_field : bytes
+		status : Status
+		tags : string[]
+		attributes : map<string,int32>
+		child : ComplexMessage
+		metadata : Any
+		optional_value : optional_value
+	}
+	
+	struct "ComplexMessageRequest" as example_ComplexMessageRequest {
+		id : int32
+	}
+	
+	struct "ComplexMessageResponse" as example_ComplexMessageResponse {
+		success : bool
+		message : string
+	}
+	
+	enum "Status" as example_Status{
+		UNKNOWN (0)
+		ACTIVE (1)
+		INACTIVE (2)
+		DELETED (3)
+	}
+	
+	interface "ExampleService" as example_ExampleService {
+		GetComplexMessage(ComplexMessageRequest) ComplexMessage
+		UpdateComplexMessage(ComplexMessage) ComplexMessageResponse
+	}
+	
+	example_ComplexMessage::optional_value - example_ComplexMessage_optional_value
+	example_ComplexMessage_name_string --|> example_ComplexMessage_optional_value
+	example_ComplexMessage_id_int32 --|> example_ComplexMessage_optional_value
+	
+}
+
+
+@enduml
